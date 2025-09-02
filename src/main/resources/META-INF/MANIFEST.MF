@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-Date: 2025-09-01 00:00:00
+version: "1.0.0.0"
+id: "B737ABC4-D43C-40F1-833F832E4E2E4D38"
+name: OpenAPI Extension
+description: OpenAPI client generation extension for Lucee Server
+start-bundles: false
+release-type: server
+lucee-core-version: "7.0.0.110"

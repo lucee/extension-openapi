@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE func-lib PUBLIC "-//Lucee//DTD CFML Function Library 1.0//EN"
+	"dtd/web-cfmfunctionlibrary_1_0.dtd">
+<func-lib>
+	<flib-version>1.00</flib-version>
+	<short-name>openapi</short-name>
+	<uri>http://extension.lucee.org/function/openapi</uri>
+	<display-name>OpenAPI Functions</display-name>
+	<description>OpenAPI client generation functions for Lucee</description>
+	
+	<function>
+		<name>createOpenApiProxy</name>
+		<class bundle-name="${bundle-name}" bundle-version="${bundle-version}">org.lucee.extension.openapi.functions.CreateOpenApiProxy</class>
+		<description>Creates a dynamic proxy object for an OpenAPI specification that allows calling API endpoints as native CFML methods.</description>
+		<argument>
+			<name>specUrlOrPath</name>
+			<type>string</type>
+			<required>Yes</required>
+			<description>URL or file path to the OpenAPI specification (JSON or YAML format). Can be a remote URL (e.g., https://api.example.com/openapi.json) or a local file path.</description>
+		</argument>
+		<argument>
+			<name>baseUrl</name>
+			<type>string</type>
+			<required>No</required>
+			<description>Optional base URL to override the server URL defined in the OpenAPI specification. Useful for pointing to different environments (dev, staging, production).</description>
+		</argument>
+		<argument>
+			<name>headers</name>
+			<type>struct</type>
+			<required>No</required>
+			<description>Optional struct of default headers to include with all API requests (e.g., authentication headers, API keys, content-type overrides).</description>
+		</argument>
+		<return>
+			<type>struct</type>
+		</return>
+	</function>
+</func-lib>

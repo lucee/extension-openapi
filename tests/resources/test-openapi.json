@@ -1,0 +1,264 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Test API",
+    "description": "A simple test API for OpenAPI extension testing",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.test.example.com/v1",
+      "description": "Test server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "operationId": "getUsers",
+        "summary": "Get all users",
+        "description": "Retrieve a list of all users",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of users to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of users to skip",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createUser",
+        "summary": "Create a new user",
+        "description": "Create a new user with the provided information",
+        "requestBody": {
+          "description": "User information",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "getUserById",
+        "summary": "Get user by ID",
+        "description": "Retrieve a specific user by their ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateUser",
+        "summary": "Update user",
+        "description": "Update an existing user's information",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated user information",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteUser",
+        "summary": "Delete user",
+        "description": "Delete a user by their ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["id", "name", "email"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique identifier for the user"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's full name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email address"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the user was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the user was last updated"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the user is active",
+            "default": true
+          }
+        }
+      },
+      "NewUser": {
+        "type": "object",
+        "required": ["name", "email"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's full name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email address"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the user is active",
+            "default": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1756748198569
+Build-Jdk-Spec: 21
+Built-Date: 2025-09-01 00:00:00
+Bundle-Description: OpenAPI client generation for Lucee
+Bundle-ManifestVersion: 2
+Bundle-Name: Lucee OpenAPI Extension
+Bundle-SymbolicName: org.lucee.extension.openapi
+Bundle-Vendor: Lucee Association Switzerland
+Bundle-Version: 1.0.0
+Created-By: Apache Maven Bundle Plugin 5.1.9
+description: OpenAPI client generation extension for Lucee Server
+DynamicImport-Package: *
+Embed-Dependency: *;scope=compile|runtime;inline=true;groupId=!org.slf
+ 4j;groupId=!ch.qos.logback;artifactId=!slf4j-api
+Embed-Directory: lib
+Embed-StripGroup: true
+Embed-Transitive: true
+Export-Package: org.lucee.extension.openapi;uses:="org.lucee.extension
+ .openapi.util";version="1.0.0",org.lucee.extension.openapi.util;uses:
+ ="lucee.runtime.exp";version="1.0.0",org.lucee.extension.openapi.func
+ tions;uses:="lucee.runtime,lucee.runtime.exp,lucee.runtime.ext.functi
+ on";version="1.0.0"
+id: "B737ABC4-D43C-40F1-833F832E4E2E4D38"
+Import-Package: android.os;resolution:=optional,com.google.appengine.a
+ pi;resolution:=optional,com.google.appengine.api.utils;resolution:=op
+ tional,com.google.apphosting.api;resolution:=optional,java.awt;resolu
+ tion:=optional,java.awt.event;resolution:=optional,java.beans;resolut
+ ion:=optional,java.io;resolution:=optional,java.lang;resolution:=opti
+ onal,java.lang.annotation;resolution:=optional,java.lang.invoke;resol
+ ution:=optional,java.lang.ref;resolution:=optional,java.lang.reflect;
+ resolution:=optional,java.math;resolution:=optional,java.net;resoluti
+ on:=optional,java.nio;resolution:=optional,java.nio.channels;resoluti
+ on:=optional,java.nio.charset;resolution:=optional,java.nio.file;reso
+ lution:=optional,java.nio.file.attribute;resolution:=optional,java.ni
+ o.file.spi;resolution:=optional,java.security;resolution:=optional,ja
+ va.security.cert;resolution:=optional,java.sql;resolution:=optional,j
+ ava.text;resolution:=optional,java.time;resolution:=optional,java.tim
+ e.chrono;resolution:=optional,java.time.format;resolution:=optional,j
+ ava.time.temporal;resolution:=optional,java.time.zone;resolution:=opt
+ ional,java.util;resolution:=optional,java.util.concurrent;resolution:
+ =optional,java.util.concurrent.atomic;resolution:=optional,java.util.
+ concurrent.locks;resolution:=optional,java.util.function;resolution:=
+ optional,java.util.jar;resolution:=optional,java.util.logging;resolut
+ ion:=optional,java.util.regex;resolution:=optional,java.util.stream;r
+ esolution:=optional,java.util.zip;resolution:=optional,javax.crypto;r
+ esolution:=optional,javax.crypto.spec;resolution:=optional,javax.lang
+ .model.element;resolution:=optional,javax.mail.internet;resolution:=o
+ ptional,javax.naming;resolution:=optional,javax.naming.directory;reso
+ lution:=optional,javax.naming.ldap;resolution:=optional,javax.net;res
+ olution:=optional,javax.net.ssl;resolution:=optional,javax.script;res
+ olution:=optional,javax.security.auth.x500;resolution:=optional,javax
+ .swing;resolution:=optional,javax.swing.border;resolution:=optional,j
+ avax.swing.event;resolution:=optional,javax.swing.filechooser;resolut
+ ion:=optional,javax.swing.table;resolution:=optional,javax.swing.text
+ ;resolution:=optional,javax.swing.tree;resolution:=optional,javax.xml
+ .datatype;resolution:=optional,javax.xml.namespace;resolution:=option
+ al,javax.xml.parsers;resolution:=optional,javax.xml.stream;resolution
+ :=optional,javax.xml.transform;resolution:=optional,javax.xml.transfo
+ rm.dom;resolution:=optional,javax.xml.transform.sax;resolution:=optio
+ nal,javax.xml.transform.stream;resolution:=optional,javax.xml.validat
+ ion;resolution:=optional,lucee.loader.engine;resolution:=optional,luc
+ ee.runtime;resolution:=optional,lucee.runtime.exp;resolution:=optiona
+ l,lucee.runtime.ext.function;resolution:=optional,lucee.runtime.util;
+ resolution:=optional,org.apache.avalon.framework.logger;resolution:=o
+ ptional,org.apache.log;resolution:=optional,org.apache.log4j;resoluti
+ on:=optional,org.glassfish.hk2.osgiresourcelocator;resolution:=option
+ al,org.ietf.jgss;resolution:=optional,org.joda.convert;resolution:=op
+ tional,org.w3c.dom;resolution:=optional,org.xml.sax;resolution:=optio
+ nal,org.xml.sax.ext;resolution:=optional,org.xml.sax.helpers;resoluti
+ on:=optional,sun.misc;resolution:=optional,sun.nio.ch;resolution:=opt
+ ional
+Lucee-Core-Version: 5.0.0.000
+name: OpenAPI Extension
+release-type: server
+start-bundles: false
+Tool: Bnd-6.3.1.202206071316
+version: "1.0.0.0"
+

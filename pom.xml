@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.lucee</groupId>
+    <artifactId>openapi-extension</artifactId>
+    <version>1.0.0</version>
+    <packaging>bundle</packaging>
+    
+    <name>Lucee OpenAPI Extension</name>
+    <description>OpenAPI client generation extension for Lucee Server</description>
+    
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lucee.version>7.0.0.346-RC</lucee.version>
+        <swagger.parser.version>2.1.32</swagger.parser.version>
+        
+        <!-- Bundle properties for filtering -->
+        <bundle-name>org.lucee.extension.openapi</bundle-name>
+        <bundle-version>1.0.0</bundle-version>
+    </properties>
+    
+    <dependencies>
+        <!-- Lucee Core -->
+        <dependency>
+            <groupId>org.lucee</groupId>
+            <artifactId>lucee</artifactId>
+            <version>${lucee.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Swagger Parser -->
+        <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser</artifactId>
+            <version>${swagger.parser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser-v3</artifactId>
+            <version>${swagger.parser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>2.2.15</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>2.2.15</version>
+        </dependency>
+        
+        <!-- Jackson Dependencies -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.20.0</version>
+            <!-- No scope provided, so it will be embedded -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.20.0</version>
+            <!-- No scope provided, so it will be embedded -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.20</version>
+            <!-- No scope provided, so it will be embedded -->
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Specify compatible plugin versions to avoid warnings -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        
+        <plugins>
+            <!-- Maven Resources Plugin with filtering enabled -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>false</filtering>
+						</resource>
+						<resource>
+							<directory>src/fld</directory>
+							<targetPath>META-INF/functions</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>            <!-- Felix Bundle Plugin for OSGi -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.9</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.lucee.extension.openapi</Bundle-SymbolicName>
+                        <Bundle-Name>Lucee OpenAPI Extension</Bundle-Name>
+                        <Bundle-Description>OpenAPI client generation for Lucee</Bundle-Description>
+                        <Bundle-Version>1.0.0</Bundle-Version>
+                        <Bundle-Vendor>Lucee Association Switzerland</Bundle-Vendor>
+                        <Export-Package>
+                            org.lucee.extension.openapi,
+                            org.lucee.extension.openapi.util,
+                            org.lucee.extension.openapi.functions
+                        </Export-Package>
+                        <Import-Package>
+                            !io.swagger.v3.*,
+                            !io.swagger.v2.*,
+                            !io.swagger.parser.*,
+                            !io.swagger.models.*,
+                            !io.swagger.util.*,
+                            !com.fasterxml.jackson.*,
+                            !org.codehaus.jackson.*,
+                            !io.swagger.*,
+                            !javax.activation.*,
+                            !javax.servlet.*,
+                            !org.yaml.*,
+                            !com.github.fge.*,
+                            !org.slf4j.*,
+                            !ch.qos.logback.*,
+                            *;resolution:=optional
+                        </Import-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                        <Bundle-ClassPath>.,{maven-dependencies}</Bundle-ClassPath>
+                        <_noee>true</_noee>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Embed-Dependency>
+                            *;scope=compile|runtime;inline=true;groupId=!org.slf4j;groupId=!ch.qos.logback;artifactId=!slf4j-api
+                        </Embed-Dependency>
+                        <Embed-Directory>lib</Embed-Directory>
+                        <Embed-StripGroup>true</Embed-StripGroup>
+                        <Lucee-Core-Version>5.0.0.000</Lucee-Core-Version>
+                    </instructions>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+            
+            <!-- Assembly Plugin to create .lex file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/lex.xml</descriptor>
+                    </descriptors>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <appendAssemblyId>true</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Rename .zip to .lex -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-to-lex</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <move file="${project.build.directory}/${project.artifactId}-${project.version}-lex.zip" 
+                                      tofile="${project.build.directory}/${project.artifactId}-${project.version}.lex"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
