@@ -1,10 +1,12 @@
 # Lucee OpenAPI Extension
 
-A powerful extension that enables `createOpenApiProxy(url)` functionality for Lucee Server, allowing automatic REST client generation from OpenAPI specifications.
+A powerful extension that enables `createOpenApiProxy( url )` functionality for Lucee Server, allowing automatic REST client generation from OpenAPI specifications.
 
 https://github.com/OAI/OpenAPI-Specification
 
 https://github.com/swagger-api/swagger-parser/
+
+https://luceeserver.atlassian.net/issues/?jql=labels%20%3D%20%22openAPI%22
 
 ## Features
 
@@ -36,8 +38,6 @@ dump(apiClient._baseurl);  // Base URL
 ## Building from Source
 
 ```bash
-git clone [repository]
-cd openapi-extension
 mvn clean package
 ```
 
