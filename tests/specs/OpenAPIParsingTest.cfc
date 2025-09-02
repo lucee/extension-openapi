@@ -23,7 +23,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase" labels="openapi" {
 		};
 		
 		// Write test spec to file
-		var testSpecFile = expandPath( getDirectoryFromPath(getCurrentTemplatePath()) & "../resources/test-spec.json");
+		var testSpecFile = getTempFile("", "test-spec", ".json");
 		fileWrite(testSpecFile, serializeJSON(testSpec));
 		
 		try {
@@ -69,7 +69,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase" labels="openapi" {
 			}
 		};
 		
-		var testSpecFile = expandPath( getDirectoryFromPath(getCurrentTemplatePath()) & "../resources/complex-spec.json");
+		var testSpecFile = getTempFile("", "complex-spec", ".json");
 		fileWrite(testSpecFile, serializeJSON(complexSpec));
 		
 		try {
